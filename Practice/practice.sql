@@ -60,6 +60,7 @@ select  first_name 이름
 select  job_title 업무이름
 		,max_salary 최고월급
 		from jobs
+    where salary >= 10000
         order by max_salary desc
         ;
 
