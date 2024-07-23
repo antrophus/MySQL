@@ -195,8 +195,6 @@ left join departments d on d.department_id = e.department_id
 join employees m on e.manager_id = m.employee_id
 ;
 
-
-
 /*
 문제9-2.
 문제9 에서 부서가 없는 직원(Kimberely)은 표시하지 않고

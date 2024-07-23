@@ -33,7 +33,7 @@ from employees
 부서별로 평균임금, 최고임금, 최저임금을 부서아이디(department_id)와 함께 출력합니다.
 정렬순서는 부서번호(department_id) 내림차순입니다.
 */
-select  avg(round(salary,0)) 평균임금
+select  round(avg(salary,0)) 평균임금
 		,max(salary) 최고임금
         ,min(salary) 최저임금
 		,department_id 부서아이디
@@ -48,7 +48,7 @@ order by department_id desc
 (정렬순서는 최소임금 2500 구간일때 확인해볼 것)
 */
 select  job_id 업무
-		,avg(round(salary,0)) 평균임금
+		,round(avg(salary,0)) 평균임금
 		,max(salary) 최고임금
         ,min(salary) 최저임금
 from employees
@@ -102,7 +102,7 @@ order by 차이 desc
 매니저아이디는 manager_id, 평균급여는 avg, 최대급여는 max, 최소급여는 min 으로 출력합니다.
 */
 select manager_id 
-		,avg(round(salary,0)) avg
+		,roune(avg(salary,0)) avg
         ,min(salary) 'min'
         ,max(salary) 'max'
 from employees
