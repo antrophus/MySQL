@@ -4,11 +4,10 @@
 평균 월급보다 적은 월급을 받는 직원은 몇명인지 구하시요.
 (56건)
 */
-/*
 select avg(salary)
 from employees
 ;
-*/
+
 select count(*) 'count(salary)'
 from employees
 where salary < (select avg(salary)
@@ -41,12 +40,44 @@ and salary <= (select max(salary) from employees)
 주(state_province), 나라아이디(country_id) 를 출력하세요
 (1건)
 */
-/*
-select department_id
+# 쿼리 풀이 - 복습 필요!!!!!!!
+# 1st step.
+(select department_id  -- > 'steven king'의 department_id : 90
 from employees
-where first_name = 'steven' and last_name = 'king'
-;*/
+where first_name = 'steven' and last_name = 'king') 
+;
+# 2nd step.
+(select location_id  -- > 'steven king'의 location_id : 1700
+from departments d
+where d.department_id = (   select e.department_id  -- > 'steven king'의 department_id : 90
+							from employees e
+							where first_name = 'steven' and last_name = 'king')  )
+;
+# 3rd together into one.
+select * -- > 'steven king'의 locations 정보 모두
+from locations l
+where l.location_id = (select location_id  -- > 'steven king'의 location_id : 1700 
+						from departments d
+						where d.department_id = (select e.department_id  -- > 'steven king'의 department_id : 90
+													from employees e
+													where first_name = 'steven' and last_name = 'king'))
+;
+# result
+select l.location_id AS '도시아이디'
+     , l.street_address AS '거리명'  
+     , l.postal_code AS '우편번호'
+     , l.city AS '도시명'
+     , l.state_province AS '주'
+     , l.country_id AS '나라아이디' 
+from locations l
+where l.location_id = (select location_id  -- > 'steven king'의 location_id : 1700 
+						from departments d
+						where d.department_id = (select e.department_id  -- > 'steven king'의 department_id : 90
+													from employees e
+													where first_name = 'steven' and last_name = 'king'))
+;
 
+# join 이용 풀이
 select l.location_id 도시아이디
 		,l.street_address 거리명
         ,l.postal_code 우편번호
