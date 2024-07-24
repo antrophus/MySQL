@@ -4,10 +4,11 @@
 평균 월급보다 적은 월급을 받는 직원은 몇명인지 구하시요.
 (56건)
 */
+/*
 select avg(salary)
 from employees
 ;
-
+*/
 select count(*) 'count(salary)'
 from employees
 where salary < (select avg(salary)
@@ -144,11 +145,13 @@ order by s.sum desc
 이름(first_name)과 월급(salary)을 조회하세요
 (38건)
 */
+/*
 select department_id
 		,avg(salary)
 from employees
 group by department_id
 ;
+*/
 select	employee_id 직원번호
 		,first_name 이름
 		,salary 월급
