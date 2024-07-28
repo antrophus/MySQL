@@ -117,21 +117,59 @@ limit 10, 10
 문제6.
 가장 늦게 입사한 직원의 이름(first_name last_name)과 월급(salary)과 근무하는 부서 이름(department_name)은?
 */
+select concat(first_name,' ',last_name) 이름
+		,salary 월급
+        ,d.department_name 부서이름
+from employees e
+join departments d on e.department_id = d.department_id
+order by hire_date desc
+limit 1
+;
 
-
-
-
+/*
 문제7.
 평균월급(salary)이 가장 높은 부서 직원들의 직원번호(employee_id), 이름(firt_name), 성(last_name)과  업무(job_title), 월급(salary)을 조회하시오.
+*/
+/*
+select 	department_id
+		,avg(salary)
+from employees
+group by department_id
+order by avg(salary) desc
+limit 1
+; -- 평균월급이 가장 높은 부서 : 90 (19333)
+select first_name
+		,department_id
+        ,salary
+from employees
+where department_id = 90
+;*/ -- 90 부서의 구성원 : steven / neena / lex
 
+select e.employee_id 직원번호
+		,e.first_name 이름
+        ,e.last_name 성
+        ,j.job_title 업무
+        ,e.salary 월급
+from employees e
+join jobs j on e.job_id = j.job_id
+join departments d on e.department_id = d.department_id
+where e.department_id = (select department_id
+							from employees
+							group by department_id
+                            order by avg(salary) desc
+                            limit 1)                          
+;
 
-
-
-
-
-
+/*
 문제8.
 평균 월급(salary)이 가장 높은 부서명과 월급은? (limt사용하지 말고 그룹함수 사용할 것)
+*/
+select department_id
+		,avg(salary)
+from employees e
+group by department_id
+order by avg(salary) desc
+;
 
 
 
