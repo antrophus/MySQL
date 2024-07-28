@@ -198,4 +198,12 @@ and e.department_id = a.department_id
 문제8.
 직원 입사일이 11번째에서 15번째의 직원의 사번, 이름, 월급, 입사일을 입사일 순서로 출력하세요
 */
--- to be continue...
+
+select   employee_id
+		,first_name
+		,salary
+        ,hire_date
+from employees
+order by hire_date asc
+limit 10, 5 -- 11번째부터 5개
+;
