@@ -70,8 +70,7 @@ group by e.manager_id, m.first_name
 having avg(e.salary) >= 5000
 order by 매니저별평균월급 desc;
 
-
-select  manager_id
+/*select  manager_id
 		,avg(salary)
         ,min(salary)
         ,max(salary)
@@ -80,7 +79,7 @@ where hire_date >= '2005/01/01'
 group by manager_id
 having avg(salary) >= 5000
 order by avg(salary) desc
-;
+;*/
 
 /*
 문제4.
@@ -88,20 +87,36 @@ order by avg(salary) desc
 부서가 없는 직원(Kimberely)도 표시합니다.
 (106명)
 */
+select 	e.employee_id 사번
+		,e.first_name 이름
+        ,d.department_name 부서명
+        ,m.first_name 매니저이름
+from employees e
+join employees m on e.manager_id = m.employee_id
+left join departments d on e.department_id = d.department_id
+;
 
-
-
+/*
 문제5.
 2005년 이후 입사한 직원중에 입사일이 11번째에서 20번째의 직원의 
 사번, 이름, 부서명, 월급, 입사일을 입사일 순서로 출력하세요
+*/
+select  e.employee_id 사번
+		,e.first_name 이름
+        ,d.department_name 부서명
+        ,e.salary 월급
+        ,e.hire_date 입사일
+from employees e
+join departments d on e.department_id = d.department_id
+where hire_date >= '2005/01/01'
+order by hire_Date asc
+limit 10, 10
+;
 
-
-
-
-
+/*
 문제6.
 가장 늦게 입사한 직원의 이름(first_name last_name)과 월급(salary)과 근무하는 부서 이름(department_name)은?
-
+*/
 
 
 
